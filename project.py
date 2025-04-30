@@ -137,7 +137,59 @@ def process_resume(file):
                 name = f"{words[0]} {words[1]}"
 
        ## اضيف من ايميل الين حقت تفريق الكود هنا 
-     
+     email = re.findall(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b', text)
+        email = email[0] if email else "Email Not Found"
+
+        # Extract phone number
+        phone = re.findall(r'\+?\d{1,4}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}|\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b', text)
+        valid_phone = [num for num in phone if len(num.replace(" ", "").replace("-", "").replace(".", "")) >= 10]
+        phone_number = valid_phone[0] if valid_phone else "Phone Not Found"
+
+        skills = re.findall(r'\b(?:Python|Java|C\+\+|SQL|Machine Learning|Data Analysis|Excel|Tableau|JavaScript|Docker|AWS|Linux|OOP)\b', text, re.IGNORECASE)
+        unique_skills = sorted(set([s.strip().title() for s in skills]))  # إزالة التكرار وتحسين التنسيق
+        skills_str = ", ".join(unique_skills) if unique_skills else "No skills found"
+
+        major = re.findall(r'\b(?:Computer Science|Engineering|Data Science|Mathematics|Business|EconomicsArtificial Intelligence|Data Science|Engineering)\b', text, re.IGNORECASE)
+        major_field = major[0] if major else "Major Not Found"
+
+        # تحليل دقة المطابقة (كما في النسخة الأصلية)
+        analyzer = ResumeAnalyzer()
+        job_results, job_accuracy = analyzer.match_jobs(skills_str)
+        overall_accuracy = analyzer.calculate_accuracy(text)
+
+        # بناء النتيجة (مع إضافة دقة التحليل)
+        output = f"Name: {name}\n"
+        output += f"Email: {email}\n"
+        output += f"Phone: {phone_number}\n"
+        output += f"Major: {major_field}\n"
+        output += f"Skills: {skills_str}\n\n"
+        output += f"Best Job Match: {job_results[0][0]} ({job_results[0][1]}%)\n\n"
+        output += "Other Job Matches:\n"
+        for job, score in job_results[1:]:
+            output += f"- {job}: {score}%\n"
+        output += f"\nOverall Analysis Accuracy: {overall_accuracy}%"
+
+        # Call the histogram plotting function here
+        plot_job_match_histogram(job_results)
+
+        return output
+    except Exception as e:
+        app.logger.error(f"An error occurred: {str(e)}")
+        return f"An error occurred: {str(e)}"
+
+def extract_text(file_path, filename):
+    try:
+        if filename.lower().endswith(".pdf"):
+            with open(file_path, "rb") as f:
+                reader = PyPDF2.PdfReader(f)
+                return " ".join(page.extract_text() or "" for page in reader.pages)
+        elif filename.lower().endswith(".docx"):
+            doc = docx.Document(file_path)
+            return " ".join(para.text for para in doc.paragraphs)
+        else:
+            raise Exception("Unsupported file type!")
+    except Exception as e:
+        return f"Error extracting text: {str(e)}"
 
 
 
