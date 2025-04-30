@@ -136,7 +136,6 @@ def process_resume(file):
             if len(words) >= 2:
                 name = f"{words[0]} {words[1]}"
 
-       ## اضيف من ايميل الين حقت تفريق الكود هنا 
      email = re.findall(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b', text)
         email = email[0] if email else "Email Not Found"
 
