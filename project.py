@@ -191,14 +191,6 @@ def extract_text(file_path, filename):
     except Exception as e:
         return f"Error extracting text: {str(e)}"
 
-
-
-
-
-
-
-
-
 class ResumeAnalyzer:
     def __init__(self):
         self.skills_list = [
