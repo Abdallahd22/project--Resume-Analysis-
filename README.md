@@ -17,7 +17,7 @@ It is designed to run in **Google Colab** and exposes the local Flask server usi
   - Major
 - 🧠 Match skills to job profiles (e.g., Data Scientist, Web Developer, DevOps)
 - 📊 Displays job match score histogram
-- 🔐 Runs securely on ngrok (auto port tunneling in Colab)
+- 🔐 Runs securely on Flask using ngrok (auto port tunneling in Colab)
 - 🖥️ Simple HTML-based frontend using Flask template strings
 
 ---
@@ -31,7 +31,10 @@ It is designed to run in **Google Colab** and exposes the local Flask server usi
 - PyPDF2 / python-docx
 - HTML/CSS (template string)
 - Matplotlib
-
+- accuracy
+- Plot bar
+- شؤ
+- شؤ
 ---
 
 ## 📦 Installation
