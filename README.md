@@ -33,9 +33,6 @@ It is designed to run in **Google Colab** and exposes the local Flask server usi
 - Matplotlib
 - accuracy
 - Plot bar
-- شؤ
-- شؤ
----
 
 ## 📦 Installation
 
