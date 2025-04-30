@@ -15,7 +15,7 @@ It is designed to run in **Google Colab** and exposes the local Flask server usi
   - Phone Number
   - Skills
   - Major
-- 🧠 Match skills to job profiles (e.g., Data Scientist, Web Developer, DevOps)
+- 🧠 Match skills to job profiles (e.g., Data Scientist,Web Developer, DevOps)
 - 📊 Displays job match score histogram
 - 🔐 Runs securely on Flask using ngrok (auto port tunneling in Colab)
 - 🖥️ Simple HTML-based frontend using Flask template strings
